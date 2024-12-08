@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/start/start",
+    "pages/wifi_station/tianqi/tianqi"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "Wi-Fi 气象站",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
+  },
+  "debug": false
+}

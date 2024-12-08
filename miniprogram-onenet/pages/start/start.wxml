@@ -1,0 +1,6 @@
+<!--start.wxml-->
+<view class="intro">
+  目的: 在手机端查看另一个地方的环境信息(温湿度, 光照)
+</view>
+
+<button class="btn1" bindtap="navigate">查看设备回传数据</button>

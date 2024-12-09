@@ -1,0 +1,38 @@
+/* start.wxss */
+.intro {
+  padding: 32px 10%;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.input {
+  background: #e5e5e5;
+  margin: 64px auto 12px;
+  width: 60%;
+  height: 88rpx;
+}
+.text {
+  color: #888;
+  font-family:PingFangSC-Regular;
+  font-size:12px;
+  text-align: center;
+}
+.btn {
+  width: 60%;
+  margin: 12px auto;
+}
+.btn-send {
+  margin-top: 32px;
+  background-color: #00aea1;
+  color: #fff;
+}
+.btn.btn-send[disabled] {
+  background-color: #00aea1;
+  opacity: 0.4;
+  color: #fff;
+}

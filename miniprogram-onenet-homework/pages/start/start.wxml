@@ -1,0 +1,23 @@
+<!-- start.wxml -->
+<view class="intro">百度天气, OneNet, AI图像识别综合实验</view>
+
+<radio-group class="radio-group" bindchange="radioChange">
+  <label style="display: flex" wx:for="{{items}}" wx:key="{{item.name}}">
+    <radio value="{{item.name}}" checked="{{item.checked}}" />
+    {{item.value}}
+  </label>
+</radio-group>
+
+<input class="input" placeholder="输入温度门限" placeholder-style="font-size:15px; color:#bfbfbf;" style="font-weight:bolder; font-size:15px; color:#000000; padding-left: 30rpx" bindinput="change" />
+<view class="text">提示：当目前温度异常时报警。单位：摄氏度</view>
+
+<button 
+  class="btn btn-send" 
+  style="opacity: {{opacity}}" 
+  disabled="{{disabled}}" 
+  bindtap="send"
+>
+  发送请求
+</button>
+
+<button class="btn btn-get" bindtap="validate">查看设备回传数据</button>

@@ -2,4 +2,5 @@ node_modules
 config/index.js
 package-lock.json
 
+upload/*
 .DS_Store

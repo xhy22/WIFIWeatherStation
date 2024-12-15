@@ -1,5 +1,4 @@
 #include "ESP8266.h"
-#include "dht11.h"
 #include "SoftwareSerial.h"
 
 // 配置 ESP8266 WiFi 设置
@@ -9,11 +8,8 @@
 #define HOST_PORT 3000                // 服务器的端口 无须更改
 #define INTERVAL_SENSOR 5000 // 定义传感器采样及发送时间间隔
 
-// 创建 dht11 示例
-dht11 DHT11;
-
-// 定义 DHT11 接入 Arduino 的管脚
-#define DHT11PIN A0
+// 定义 LM35D 接入 Arduino 的管脚
+#define LM35PIN A0
 
 // 定义 ESP8266 所连接的软串口
 SoftwareSerial mySerial(3, 2); // ESP8266 连接到 D3 和 D2
@@ -43,14 +39,12 @@ void setup() {
     Serial.print("Join AP failure\r\n");
   }
 
-  Serial.println("");
-  Serial.print("DHT11 LIBRARY VERSION: ");
-  Serial.println(DHT11LIB_VERSION);
 
   mySerial.println("AT+UART_CUR=9600,8,1,0,0");
   mySerial.begin(9600);
   Serial.println("setup end\r\n");
 }
+
 
 unsigned long net_time1 = millis(); // 数据上传服务器时间
 
@@ -59,32 +53,13 @@ void loop() {
     net_time1 = millis();
 
   if (millis() - net_time1 > INTERVAL_SENSOR) { // 发送数据时间间隔
-    int chk = DHT11.read(DHT11PIN);
-
-    Serial.print("Read sensor: ");
-    switch (chk) {
-      case DHTLIB_OK:
-        Serial.println("OK");
-        break;
-      case DHTLIB_ERROR_CHECKSUM:
-        Serial.println("Checksum error");
-        break;
-      case DHTLIB_ERROR_TIMEOUT:
-        Serial.println("Time out error");
-        break;
-      default:
-        Serial.println("Unknown error");
-        break;
-    }
-
-    float sensor_hum = (float)DHT11.humidity;
-    float sensor_tem = (float)DHT11.temperature;
-    Serial.print("Humidity (%): ");
-    Serial.println(sensor_hum, 2);
+    // 读取 LM35D 传感器温度值
+    int sensorValue = analogRead(LM35PIN); // 读取传感器值
+    float voltage = sensorValue * (5.0 / 1023.0); // 转换为电压值
+    float temperature = voltage * 100; // 转换为温度值，LM35D 每十分一为1度
 
     Serial.print("Temperature (oC): ");
-    Serial.println(sensor_tem, 2);
-    Serial.println("");
+    Serial.println(temperature, 2);
 
     if (wifi.createTCP(HOST_NAME, HOST_PORT)) { // 建立TCP连接，如果失败，不能发送该数据
       Serial.print("create tcp ok\r\n");
@@ -92,16 +67,10 @@ void loop() {
       // 构建 JSON 数据
       char buf[10];
       String jsonToSend = "{";
-      
+
       // 拼接温度数据
       jsonToSend += "\"temperature\":";
-      dtostrf(sensor_tem, 1, 2, buf);  // 将温度值转换为字符串
-      jsonToSend += String(buf);
-      jsonToSend += ",";
-
-      // 拼接湿度数据
-      jsonToSend += "\"humidity\":";
-      dtostrf(sensor_hum, 1, 2, buf);  // 将湿度值转换为字符串
+      dtostrf(temperature, 1, 2, buf);  // 将温度值转换为字符串
       jsonToSend += String(buf);
       jsonToSend += "}";  // 结束 JSON 数据
 

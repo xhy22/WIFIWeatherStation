@@ -21,8 +21,8 @@ app.use(express.json());
 // 密钥可前往官网控制台 https://console.cloud.tencent.com/cam/capi 进行获取
 const clientConfig = {
   credential: {
-    secretId: "XXXX",
-    secretKey: "XXXX",
+    secretId: "xxxx",
+    secretKey: "xxxx",
   },
   region: "ap-beijing",
   profile: {

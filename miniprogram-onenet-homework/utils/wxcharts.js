@@ -98,7 +98,7 @@ var util = {
 function findRange(num, type, limit) {
     if (isNaN(num)) {
         throw new Error('[wxCharts] unvalid series data!');
-    }
+    } 
     limit = limit || 10;
     type = type ? type : 'upper';
     var multiple = 1;

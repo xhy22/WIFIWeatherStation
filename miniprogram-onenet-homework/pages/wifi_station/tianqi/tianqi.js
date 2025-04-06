@@ -57,11 +57,11 @@ Page({
         url: `https://iot-api.heclouds.com/thingmodel/query-device-property?product_id=产品id&device_name=设备名称`,
         header: {
           'content-type': 'application/json',
-          'authorization': "鉴权"
+          'authorization': "XXXX"
         },
         success: (res) => {
           const response = res.data;
-  
+        console.log(response);
           // 提取温度和湿度数据
           const temperatureData = response.data.find(item => item.identifier === 'temperature');
           const humidityData = response.data.find(item => item.identifier === 'humidity');

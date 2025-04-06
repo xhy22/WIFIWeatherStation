@@ -32,7 +32,7 @@ Page({
     // 就是这里需要改动
 
     var theBaiDuAPPkey = "XXXX" //百度的APPkey
-    var district_id = "XXXX"  //天气查询的区域编码,如110108，具体请参考百度的api文档说明
+    var district_id = "110108"  //天气查询的区域编码,如110108，具体请参考百度的api文档说明
 
     const requestTask = wx.request({
       url: `https://api.map.baidu.com/weather/v1/?district_id=${district_id}&data_type=all&ak=${theBaiDuAPPkey}`, //百度天气API

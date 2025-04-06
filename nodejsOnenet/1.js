@@ -24,7 +24,7 @@ app.post('/api/data', (req, res) => {
   // 创建请求头，OneNET API 要求传入授权的 API Key
   const headers = {
     'Content-Type': 'application/json',
-    'token': 'token值'  // 替换为你自己的 OneNET API Key
+    'token': 'version=2018-10-31&...................'  // 替换为自己生成的TOKEN
   };
 
   // 构造发送到 OneNET 的数据

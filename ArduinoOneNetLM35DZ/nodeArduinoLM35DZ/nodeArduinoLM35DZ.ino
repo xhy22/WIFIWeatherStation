@@ -55,8 +55,8 @@ void loop() {
   if (millis() - net_time1 > INTERVAL_SENSOR) { // 发送数据时间间隔
     // 读取 LM35D 传感器温度值
     int sensorValue = analogRead(LM35PIN); // 读取传感器值
-    float voltage = sensorValue * (5.0 / 1023.0); // 转换为电压值
-    float temperature = voltage * 100; // 转换为温度值，LM35D 每十分一为1度
+    float voltage = (sensorValue * 5.0) / 1024.0; // 将模拟值转换为电压值(0-5V)
+    float temperature = voltage * 100; // 将电压转换为温度(10mV/°C)
 
     Serial.print("Temperature (oC): ");
     Serial.println(temperature, 2);
